@@ -2,13 +2,13 @@
 {
     public class Transform
     {
-        public int RowOffset { get; set; }
-        public int ColumnOffset { get; set; }
+        public int Row { get; set; }
+        public int Column { get; set; }
 
-        public Transform(int rowOffset, int columnOffset) 
+        public Transform(int row, int column) 
         {
-            RowOffset = rowOffset;
-            ColumnOffset = columnOffset;
+            Row = row;
+            Column = column;
         }
     }
 }
