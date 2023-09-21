@@ -1,12 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tetris
 {
-    internal class BlockQueue
+    public class BlockQueue
     {
+        private readonly Block[] _blocks = new Block[]
+        {
+            new IBlock(),
+            new JBlock(),
+            new LBlock(),
+            new OBlock(),
+            new SBlock(),
+            new TBlock(),
+            new ZBlock()
+        };
+        private Random _random = new();
+
+        public Block NextBlock { get; private set; }
+
+        public Block GetNextBlock()
+        {
+            Block block = NextBlock;
+
+            do
+            {
+                NextBlock = GetRandomBlock();
+            } 
+            while (block.Id == NextBlock.Id);
+
+            return block;
+        }
+
+        private Block GetRandomBlock()
+        {
+            return _blocks[_random.Next(_blocks.Length)];
+        }
     }
 }
