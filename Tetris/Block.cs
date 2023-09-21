@@ -35,11 +35,10 @@ namespace Tetris
             if (_rotationState < 0)
             {
                 _rotationState = Tiles.Length - 1;
+                return;
             }
-            else
-            {
-                _rotationState--;
-            }
+
+            _rotationState--;
         }
 
         public void Move(int rows, int columns)

@@ -74,11 +74,10 @@
                 {
                     ClearRow(i);
                     cleared++;
+                    continue;
                 }
-                else if (cleared > 0)
-                {
-                    MoveRowDown(i, cleared);
-                }
+
+                MoveRowDown(i, cleared);
             }
 
             return cleared;
