@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tetris
+﻿namespace Tetris
 {
-    internal class Transform
+    public class Transform
     {
+        public int RowOffset { get; set; }
+        public int ColumnOffset { get; set; }
+
+        public Transform(int rowOffset, int columnOffset) 
+        {
+            RowOffset = rowOffset;
+            ColumnOffset = columnOffset;
+        }
     }
 }
