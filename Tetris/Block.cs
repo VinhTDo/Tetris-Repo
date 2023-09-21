@@ -10,18 +10,18 @@ namespace Tetris
         public abstract int Id { get; }
 
         private int _rotationState = 0;
-        private Transform offset; 
+        private Transform _offset; 
 
         public Block()
         {
-            offset = new(StartOffset.Row, StartOffset.Column);
+            _offset = new(StartOffset.Row, StartOffset.Column);
         }
 
         public IEnumerable<Transform> GetTileTransforms()
         {
             foreach (Transform transform in Tiles[_rotationState]) 
             {
-                yield return new Transform(transform.Row + offset.Row, transform.Column + offset.Column);
+                yield return new Transform(transform.Row + _offset.Row, transform.Column + _offset.Column);
             }
         }
 
@@ -43,15 +43,15 @@ namespace Tetris
 
         public void Move(int rows, int columns)
         {
-            offset.Row += rows;
-            offset.Column += columns;
+            _offset.Row += rows;
+            _offset.Column += columns;
         }
 
         public void Reset()
         {
             _rotationState = 0;
-            offset.Row = StartOffset.Row;
-            offset.Column = StartOffset.Column;
+            _offset.Row = StartOffset.Row;
+            _offset.Column = StartOffset.Column;
         }
     }
 }
