@@ -1,8 +1,5 @@
 ﻿namespace Tetris
 {
-    /// <summary>
-    /// Create a 2D game grid
-    /// </summary>
     public class GameGrid
     {
         private readonly int[,] _grid;
