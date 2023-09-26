@@ -32,7 +32,7 @@ namespace Tetris
 
         public void RotateCounterClockwise()
         {
-            if (_rotationState < 0)
+            if (_rotationState == 0)
             {
                 _rotationState = Tiles.Length - 1;
                 return;
