@@ -49,6 +49,8 @@
                 GameGrid[transform.Row, transform.Column] = _currentBlock.Id;
             }
 
+            GameGrid.ClearFullRows();
+
             if (IsGameOver())
             {
                 GameOver = true;
