@@ -14,9 +14,14 @@ namespace Tetris
             new TBlock(),
             new ZBlock()
         };
-        private Random _random = new();
+        private readonly Random _random = new();
 
         public Block NextBlock { get; private set; }
+
+        public BlockQueue()
+        {
+            NextBlock = GetRandomBlock();
+        }
 
         public Block GetNextBlock()
         {
