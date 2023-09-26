@@ -15,6 +15,7 @@
         public GameGrid GameGrid { get; }
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; }
+        public int Score { get; private set; } = 0;
 
         public GameState(int gridRowSize, int gridColumnSize)
         {
@@ -49,7 +50,7 @@
                 GameGrid[transform.Row, transform.Column] = _currentBlock.Id;
             }
 
-            GameGrid.ClearFullRows();
+            Score += GameGrid.ClearFullRows();
 
             if (IsGameOver())
             {
