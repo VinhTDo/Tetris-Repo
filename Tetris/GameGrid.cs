@@ -32,17 +32,17 @@
 
         public void ClearRow(int row)
         {
-            for (int i = 0; i < Columns; i++)
+            for (int c = 0; c < Columns; c++)
             {
-                _grid[row, i] = 0;
+                _grid[row, c] = 0;
             }
         }
 
         public bool IsRowFull(int row)
         {
-            for (int i = 0; i < Columns; i++)
+            for (int c = 0; c < Columns; c++)
             {
-                if (_grid[row, i] == 0)
+                if (_grid[row, c] == 0)
                 {
                     return false;
                 }
@@ -53,9 +53,9 @@
 
         public bool IsRowEmpty(int row)
         {
-            for (int i = 0; i < Columns; i++)
+            for (int c = 0; c < Columns; c++)
             {
-                if (_grid[row, i] != 0)
+                if (_grid[row, c] != 0)
                 {
                     return false;
                 }
@@ -68,16 +68,17 @@
         {
             int cleared = 0;
 
-            for (int i = Rows - 1; i >= 0; i--)
+            for (int r = Rows - 1; r >= 0; r--)
             {
-                if (IsRowFull(i))
+                if (IsRowFull(r))
                 {
-                    ClearRow(i);
+                    ClearRow(r);
                     cleared++;
-                    continue;
                 }
-
-                MoveRowDown(i, cleared);
+                else if (cleared > 0)
+                {
+                    MoveRowDown(r, cleared);
+                }
             }
 
             return cleared;
@@ -85,10 +86,10 @@
 
         private void MoveRowDown(int row, int numRows)
         {
-            for (int i = 0; i < Columns; i++)
+            for (int r = 0; r < Columns; r++)
             {
-                _grid[row + numRows, i] = _grid[row, i];
-                _grid[row, i] = 0;
+                _grid[row + numRows, r] = _grid[row, r];
+                _grid[row, r] = 0;
             }
         }
     }
