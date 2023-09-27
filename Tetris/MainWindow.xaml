@@ -5,8 +5,144 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Tetris" 
+        Height="600" Width="800"
+        MinHeight="600" MinWidth="600"
+        FontFamily="Ebrima"
+        Foreground="White"
+        Background="White"
+        Icon="Assets/Icon.ico"
+        KeyDown="Window_KeyDown">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Offset="0"
+                              Color="#FF693890"/>
+                <GradientStop Offset="1"
+                              Color="#FF4D2170"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <Viewbox Grid.Row="1"
+            Grid.Column="1">
+            <Canvas x:Name="GridCanvas"
+                Width="250"
+                Height="510"
+                Margin="0,0,0,15"
+                ClipToBounds="True"
+                Loaded="GridCanvas_Loaded">
+                <Canvas.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="0,1">
+                        <GradientStop Offset="0.15"
+                                      Color="#FF292929"/>
+                        <GradientStop Offset="1"
+                                      Color="#FF161616"/>
+                    </LinearGradientBrush>
+                </Canvas.Background>
+            </Canvas>
+        </Viewbox>
+        
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="SCORE"
+                       FontSize="24"
+                       TextAlignment="Center"/>
+            <TextBlock x:Name="ScoreTextBlock"
+                       FontSize="22"
+                       Text="0"
+                       TextAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
+            <TextBlock Text="HOLD"
+                       FontSize="22"
+                       TextAlignment="Center"/>
+            <Image x:Name="HoldBlockImage" 
+                   Source="Assets/Block-Empty.png"
+                   Width="120"
+                   Margin="20"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+            <TextBlock Text="NEXT"
+                       FontSize="22"
+                       TextAlignment="Center"/>
+            <Image x:Name="NextBlockImage" 
+                   Source="Assets/Block-Empty.png"
+                   Width="120"
+                   Margin="20"/>
+        </StackPanel>
+
+        <Grid x:Name="GameOverMenuGrid"
+              Background="#CC000000"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Visibility="Hidden">
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="GAME OVER"
+                           FontWeight="Bold"
+                           FontSize="40"
+                           Margin="0,0,0,20"/>
+                <TextBlock Text="SCORE"
+                       FontSize="22"
+                       TextAlignment="Center"/>
+                <TextBlock x:Name="FinalScoreTextBlock"
+                       FontSize="20"
+                       Text="0"
+                       TextAlignment="Center"/>
+                <TextBlock Text="HIGHSCORE"
+                           FontSize="22"
+                           TextAlignment="Center"/>
+                <TextBlock x:Name="HighscoreTextBlock"
+                           FontSize="20"
+                           Text="0"
+                           TextAlignment="Center"/>
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="MainMenuButton"
+                            Grid.Column="0"
+                            Content="Main Menu"
+                            FontSize="20"
+                            Padding="4"
+                            Click="MainMenuButton_Click"/>
+                    <Button x:Name="PlayAgainButton"
+                            Grid.Column="2"
+                            Content="Play Again"
+                            FontSize="20"
+                            Padding="4"
+                            Click="PlayAgainButton_Click"/>
+                </Grid>
+            </StackPanel>
+            
+        </Grid>
     </Grid>
 </Window>
