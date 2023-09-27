@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Tetris
 {
@@ -50,6 +43,7 @@ namespace Tetris
         private int _maxDelay = 1000;
         private int _minDelay = 75;
         private int _delayDecrease = 25;
+        private int _highScore = 0;
         private double _opacity = 0.25d;
         private GameState _gameState = new(_gridRowSize, _gridColumnSize);
 
@@ -57,6 +51,7 @@ namespace Tetris
         {
             InitializeComponent();
             _imageControls = InitializeGameGrid(_gameState.GameGrid);
+            _highScore = Properties.Settings.Default.HighScore;
         }
 
         private Image[,] InitializeGameGrid(GameGrid grid)
@@ -97,6 +92,15 @@ namespace Tetris
 
             GameOverMenuGrid.Visibility = Visibility.Visible;
             FinalScoreTextBlock.Text = $"{_gameState.Score}";
+
+            if (_gameState.Score > _highScore)
+            {
+                _highScore = _gameState.Score;
+                Properties.Settings.Default.HighScore = _gameState.Score;
+                Properties.Settings.Default.Save();
+            }
+
+            HighscoreTextBlock.Text = $"{_highScore}";
         }
 
         private void DrawGrid(GameGrid grid)
