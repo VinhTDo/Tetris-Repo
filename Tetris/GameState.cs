@@ -12,10 +12,12 @@
                 _currentBlock.Reset();
             } 
         }
+        public Block HeldBlock { get; private set; }
         public GameGrid GameGrid { get; }
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; }
         public int Score { get; private set; } = 0;
+        public bool CanHold { get; private set; }
 
         public GameState(int gridRowSize, int gridColumnSize)
         {
@@ -23,6 +25,7 @@
             BlockQueue = new();
             CurrentBlock = BlockQueue.GetNextBlock();
             GameOver = false;
+            CanHold = true;
         }
 
         private bool DoesBlockFit()
@@ -59,6 +62,27 @@
             }
 
             CurrentBlock = BlockQueue.GetNextBlock();
+            CanHold = true;
+        }
+
+        public void HoldBlock()
+        {
+            if (!CanHold)
+            {
+                return;
+            }
+
+            if (HeldBlock == null)
+            {
+                HeldBlock = CurrentBlock;
+                CurrentBlock = BlockQueue.GetNextBlock();
+            }
+            else
+            {
+                (HeldBlock, CurrentBlock) = (CurrentBlock, HeldBlock);
+            }
+
+            CanHold = false;
         }
 
         public void RotateBlockClockwise()
