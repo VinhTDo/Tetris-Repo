@@ -200,11 +200,6 @@ namespace Tetris
             await StartGameLoopAsync();
         }
 
-        private void MainMenuButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             _gameState = new(_gridRowSize, _gridColumnSize);
