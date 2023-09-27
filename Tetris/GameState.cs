@@ -1,4 +1,6 @@
-﻿namespace Tetris
+﻿using System;
+
+namespace Tetris
 {
     public class GameState
     {
@@ -46,6 +48,18 @@
             return !(GameGrid.IsRowEmpty(0) && GameGrid.IsRowEmpty(1));
         }
 
+        private int GetTileDropDistance(Transform transform)
+        {
+            int dropDistance = 0;
+
+            while (GameGrid.IsEmpty(transform.Row + dropDistance + 1, transform.Column))
+            {
+                dropDistance++;
+            }
+
+            return dropDistance;
+        }
+
         private void PlaceBlock()
         {
             foreach (Transform transform in _currentBlock.GetTileTransforms())
@@ -83,6 +97,11 @@
             }
 
             CanHold = false;
+        }
+
+        public void DropBlock()
+        {
+            CurrentBlock.Move(GetBlockDropDistance(), 0);
         }
 
         public void RotateBlockClockwise()
@@ -134,6 +153,18 @@
                 _currentBlock.Move(-1, 0);
                 PlaceBlock();
             }
+        }
+
+        public int GetBlockDropDistance()
+        {
+            int dropDistance = GameGrid.Rows;
+
+            foreach (Transform transform in CurrentBlock.GetTileTransforms())
+            {
+                dropDistance = Math.Min(dropDistance, GetTileDropDistance(transform));
+            }
+
+            return dropDistance;
         }
     }
 }
